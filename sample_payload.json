@@ -1,0 +1,107 @@
+{
+  "subscriptionId": "676d23a556fb3da9360f9bad",
+  "data": [
+      {
+          "id": "urn:ngsi-ld:Sensor:94",
+          "type": "Sensor",
+          "date": {
+              "type": "DateTime",
+              "value": "2024-12-26T09:41:51.000Z",
+              "metadata": {
+                  "dateCreated": {
+                      "type": "DateTime",
+                      "value": "2024-12-26T08:44:22.112Z"
+                  },
+                  "dateModified": {
+                      "type": "DateTime",
+                      "value": "2024-12-26T09:41:51.264Z"
+                  }
+              }
+          },
+          "vitesse": {
+              "type": "Number",
+              "value": 85.2,
+              "metadata": {
+                  "dateCreated": {
+                      "type": "DateTime",
+                      "value": "2024-12-26T08:44:22.112Z"
+                  },
+                  "dateModified": {
+                      "type": "DateTime",
+                      "value": "2024-12-26T09:41:51.264Z"
+                  }
+              }
+          },
+          "voie": {
+              "type": "Number",
+              "value": "middle",
+              "metadata": {
+                  "dateCreated": {
+                      "type": "DateTime",
+                      "value": "2024-12-26T08:44:22.112Z"
+                  },
+                  "dateModified": {
+                      "type": "DateTime",
+                      "value": "2024-12-26T09:41:51.264Z"
+                  }
+              }
+          },
+          "sens": {
+              "type": "Number",
+              "value": "northbound",
+              "metadata": {
+                  "dateCreated": {
+                      "type": "DateTime",
+                      "value": "2024-12-26T08:44:22.112Z"
+                  },
+                  "dateModified": {
+                      "type": "DateTime",
+                      "value": "2024-12-26T09:41:51.264Z"
+                  }
+              }
+          },
+          "longueur": {
+              "type": "Number",
+              "value": 8.8,
+              "metadata": {
+                  "dateCreated": {
+                      "type": "DateTime",
+                      "value": "2024-12-26T08:44:22.112Z"
+                  },
+                  "dateModified": {
+                      "type": "DateTime",
+                      "value": "2024-12-26T09:41:51.264Z"
+                  }
+              }
+          },
+          "class": {
+              "type": "Text",
+              "value": "SUV",
+              "metadata": {
+                  "dateCreated": {
+                      "type": "DateTime",
+                      "value": "2024-12-26T08:44:22.112Z"
+                  },
+                  "dateModified": {
+                      "type": "DateTime",
+                      "value": "2024-12-26T09:41:51.264Z"
+                  }
+              }
+          },
+          "cat": {
+              "type": "Text",
+              "value": "E",
+              "metadata": {
+                  "dateCreated": {
+                      "type": "DateTime",
+                      "value": "2024-12-26T08:44:22.112Z"
+                  },
+                  "dateModified": {
+                      "type": "DateTime",
+                      "value": "2024-12-26T09:41:51.264Z"
+                  }
+              }
+          }
+      }
+  ]
+} 

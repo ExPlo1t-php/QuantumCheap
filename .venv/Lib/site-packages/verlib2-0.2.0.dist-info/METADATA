@@ -1,0 +1,147 @@
+Metadata-Version: 2.1
+Name: verlib2
+Version: 0.2.0
+Summary: A standalone variant of packaging.version, without anything else.
+Author-email: Donald Stufft <donald@stufft.io>
+Maintainer-email: Andreas Motl <andreas.motl@panodata.org>
+License: Apache License 2.0
+Project-URL: Repository, https://github.com/panodata/verlib2
+Keywords: distutils,packaging,version
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Classifier: Programming Language :: Python :: Implementation :: PyPy
+Classifier: Typing :: Typed
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Provides-Extra: develop
+Requires-Dist: black <23 ; extra == 'develop'
+Requires-Dist: mypy ==1.6.0 ; extra == 'develop'
+Requires-Dist: poethepoet <1 ; extra == 'develop'
+Requires-Dist: pyproject-fmt <1.3 ; extra == 'develop'
+Requires-Dist: ruff ==0.0.292 ; extra == 'develop'
+Requires-Dist: validate-pyproject <0.16 ; extra == 'develop'
+Provides-Extra: release
+Requires-Dist: build <2 ; extra == 'release'
+Requires-Dist: twine <5 ; extra == 'release'
+Provides-Extra: test
+Requires-Dist: pretend <2 ; extra == 'test'
+Requires-Dist: pytest <8 ; extra == 'test'
+Requires-Dist: pytest-cov <5 ; extra == 'test'
+
+# verlib2
+
+[![Tests](https://github.com/panodata/verlib2/actions/workflows/main.yml/badge.svg)](https://github.com/panodata/verlib2/actions/workflows/main.yml)
+[![Test coverage](https://img.shields.io/codecov/c/gh/panodata/verlib2.svg)](https://codecov.io/gh/panodata/verlib2/)
+[![Python versions](https://img.shields.io/pypi/pyversions/verlib2.svg)](https://pypi.org/project/verlib2/)
+
+[![License](https://img.shields.io/github/license/panodata/verlib2.svg)](https://github.com/panodata/verlib2/blob/main/LICENSE)
+[![Status](https://img.shields.io/pypi/status/verlib2.svg)](https://pypi.org/project/verlib2/)
+[![PyPI](https://img.shields.io/pypi/v/verlib2.svg)](https://pypi.org/project/verlib2/)
+[![Downloads](https://pepy.tech/badge/verlib2/month)](https://www.pepy.tech/projects/verlib2)
+
+
+<!-- » [Documentation] -->
+
+» [Changelog]
+| [PyPI]
+| [Issues]
+| [Source code]
+| [License]
+
+[Changelog]: https://github.com/panodata/verlib2/blob/main/CHANGES.md
+[Documentation]: https://verlib2.readthedocs.io/
+[Issues]: https://github.com/panodata/verlib2/issues
+[License]: https://github.com/panodata/verlib2/blob/main/LICENSE
+[PyPI]: https://pypi.org/project/verlib2/
+[Source code]: https://github.com/panodata/verlib2
+
+
+## About
+
+A standalone variant of `packaging.version`, without anything else.
+
+[verlib] is the implementation of [PEP 386]. [verlib2] is the implementation of [PEP 440]. 
+
+
+## Rationale
+
+Everyone needs to compare versions, but no one wants to add `packaging` as a dependency.
+`distutils` is deprecated, and Python 3.12 removed it from the standard library.
+
+
+## Setup
+
+```shell
+pip install verlib2
+```
+
+
+## Usage
+```
+from verlib2 import Version
+
+assert Version("1.0.dev456") < Version("1!1.2.rev33+123456") 
+```
+
+
+## Acknowledgements
+
+Tarek Ziadé, Donald Stufft, and all contributors to `distutilsversion`, `verlib`,
+`distutils`, `distutils2`, `packaging.version`, PEP-0386, PEP-0440, and most
+probably more.
+
+
+## Prior Art
+
+- https://peps.python.org/pep-0386/
+- https://peps.python.org/pep-0440/
+- http://bitbucket.org/tarek/distutilsversion/
+- https://pypi.org/project/verlib/
+- https://hg.python.org/distutils2
+- https://github.com/pypa/packaging/blob/23.2/src/packaging/version.py
+- https://github.com/numpy/numpy/pull/21000
+- https://github.com/numpy/numpy/blob/v1.26.0/numpy/_utils/_pep440.py
+- https://github.com/crate/crate-python/pull/513
+- https://pypi.org/search/?q=pep440
+- https://pypi.org/project/pep440/
+- https://pypi.org/project/pep440deb/
+- https://pypi.org/project/pep440nz/
+- https://pypi.org/project/pep440-rs/
+- https://pypi.org/project/pep440-utility/
+- https://pypi.org/project/pep440-version-utils/
+- https://pypi.org/project/version-utils/
+
+
+## Development
+
+Set up package in development mode.
+```shell
+python3 -m venv .venv
+source .venv/bin/activate
+pip install --editable='.[develop,test]'
+```
+
+Run software tests.
+```shell
+poe check
+```
+
+
+
+[verlib]: https://pypi.org/project/verlib/
+[verlib2]: https://pypi.org/project/verlib2/
+[PEP 386]: https://peps.python.org/pep-0386/
+[PEP 440]: https://peps.python.org/pep-0440/
