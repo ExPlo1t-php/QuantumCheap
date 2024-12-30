@@ -9,11 +9,14 @@ import time
 load_dotenv()
 
 CRATE_HOST = os.getenv('CRATE_HOST')
+CRATE_USERNAME = os.getenv('CRATE_USERNAME')
+
 app = Flask(__name__)
 
 def exec_query(query, params=None):
+    # function used to execute queries to CrateDB
     try:
-        with client.connect(CRATE_HOST, username="crate", error_trace=True) as connection:
+        with client.connect(CRATE_HOST, username=CRATE_USERNAME , error_trace=True) as connection:
             connection.autocommit = True
             cursor = connection.cursor()
             cursor.execute(query, params or ())
@@ -21,8 +24,6 @@ def exec_query(query, params=None):
                 result = cursor.fetchall()
                 return result
             else:
-                print(params[2])
-                print(cursor.rowcount)
                 print("Query executed successfully")
                 return cursor.rowcount  # Log how many rows were updated
     except Exception as e:
@@ -32,24 +33,34 @@ def exec_query(query, params=None):
 
 @app.route('/v2/notify', methods=['POST'])
 def home():
+    # getting the request data and headers from the Context Broker
     body_data = request.get_json()
+
     headers = request.headers
 
+    # store the Fiware-Service header value
     service = headers.get("fiware-service", "").lower()
+
     if not service:
         return jsonify({"error": "Missing Fiware-Service header"}), 400
-
+    # add prefix to the service name (required for naming conformity for )
     service = f"mt{service}"
+
     data = body_data.get("data", [])
+
     if not data:
         return jsonify({"error": "Missing data field in request"}), 400
 
     obj = data[0]
+    # getting the entity_id and entity_type from the request data
+    # i.g. "id": "urn:ngsi-ld:Device:001"
     entity_id = obj.get('id')
+    # i.g. "type": "Device" 
     entity_type = obj.get('type')
+
     if not entity_id or not entity_type:
         return jsonify({"error": "Missing id or type in entity data"}), 400
-
+    # add prefix to the entity_type name (required for naming conformity for tables)
     entity = f"et{entity_type.lower()}"
 
     check_query = """
@@ -59,6 +70,7 @@ def home():
         AND table_schema = ?
         AND column_name = 'rssi';
     """
+    # add column rssi if it does not exist (use this to add any other columns as well)
     add_column_query = f'ALTER TABLE "{service}"."{entity}" ADD COLUMN rssi float;'
 
     if not exec_query(check_query, [entity, service]):
@@ -100,8 +112,6 @@ def home():
         time.sleep(1)
         # Row does not exist, optionally handle insertion or return error
         return jsonify({"error": "Row not found for update"}), 404
-
-    return jsonify({"status": "done"})
 
 if __name__ == '__main__':
     app.run(debug=True)
